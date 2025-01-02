@@ -7,6 +7,7 @@ import { useState, useEffect, Children } from 'react';
 import { TextEffect } from '../ui/text-effect';
 import { SpinningText } from '../ui/spinning-text';
 import { MoveRight } from 'lucide-react';
+import Link from 'next/link';
 
 type TextLoopProps = {
     children: React.ReactNode[];
@@ -40,27 +41,33 @@ export default function Hero({ children, className, interval = 2, transition = {
         exit: { y: -20, opacity: 0 },
     };
     return (
-        <main className="pt-24 p-8">
+        <main className="pt-24 px-4 lg:px-8">
             <section
-                className="relative mx-4 rounded-xl h-screen flex flex-col items-center"
+                className="relative p-8 rounded-xl h-screen flex flex-col items-center"
                 style={{
                     background: 'radial-gradient(circle, #EBE1FF, #E8ECFF, #EBE1FF)',
                 }}
             >
-                <TextEffect per="word" preset="fade" className="text-5xl text-center font-amstelvar max-w-3xl mt-28 mb-8">
+                <TextEffect
+                    per="word"
+                    preset="fade"
+                    className="text-3xl sm:text-4xl lg:text-5xl text-center font-amstelvar max-w-3xl mt-12 md:mt-20 lg:mt-28 mb-4 md:mb-8"
+                >
                     Track your expenses, plan your budget, and achieve your financial goals all in one platform.
                 </TextEffect>
-                <TextEffect per="word" preset="fade" className="text-xl text-center">
+                <TextEffect per="word" preset="fade" className="text-base md:text-xl text-center">
                     Manage your finances easily and efficiently.
                 </TextEffect>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="mt-8"
+                    className="mt-6 md:mt-8"
                 >
-                    <Button size="lg">
-                        Get Started <MoveRight />
+                    <Button size="lg" asChild>
+                        <Link href="/dashboard">
+                            Get Started <MoveRight />
+                        </Link>
                     </Button>
                 </motion.div>
 
@@ -68,14 +75,25 @@ export default function Hero({ children, className, interval = 2, transition = {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5, ease: 'easeOut' }}
-                    className="absolute -bottom-44 left-1/2 transform -translate-x-1/2 w-full max-w-3xl h-96 bg-zinc-100 rounded-xl"
+                    className="absolute -bottom-32 lg:-bottom-44 left-1/2 transform -translate-x-1/2 w-2/3 lg:w-full max-w-3xl h-96 bg-zinc-100 rounded-xl"
                 >
-                    <SpinningText radius={5} fontSize={1.2} className="absolute right-0 top-0 font-medium leading-none font-amstelvar">
+                    <SpinningText
+                        radius={5}
+                        fontSize={1.2}
+                        className="absolute hidden md:block right-0 top-0 font-medium leading-none font-amstelvar"
+                    >
+                        {`Easily • Quickly • Effectively •`}
+                    </SpinningText>
+                    <SpinningText
+                        radius={4.5}
+                        fontSize={1}
+                        className="absolute block md:hidden right-0 top-0 font-medium leading-none font-amstelvar"
+                    >
                         {`Easily • Quickly • Effectively •`}
                     </SpinningText>
                 </motion.div>
             </section>
-            <h2 className="font-amstelvar text-3xl mt-52 text-center mx-auto max-w-2xl">
+            <h2 className="font-amstelvar text-xl md:text-2xl lg:text-3xl mt-40 lg:mt-52 text-center mx-auto max-w-lg lg:max-w-2xl">
                 With Savr, you can manage your finances in a way that's more{' '}
                 <span className={cn('relative inline-block whitespace-nowrap', className)}>
                     <AnimatePresence mode="popLayout" initial={false}>
@@ -92,7 +110,7 @@ export default function Hero({ children, className, interval = 2, transition = {
                     </AnimatePresence>
                 </span>
             </h2>
-            <div className="w-full max-w-6xl mx-auto border-t border-gray-300 my-20"></div>
+            <div className="w-full max-w-6xl mx-auto border-t border-gray-300 my-12 md:my-20"></div>
         </main>
     );
 }

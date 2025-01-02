@@ -3,9 +3,9 @@ import { ChevronRight } from 'lucide-react';
 
 export default function Faq() {
     return (
-        <section className="max-w-6xl mx-auto pb-12">
-            <h2 className="font-amstelvar text-3xl max-w-xl">FAQ</h2>
-            <p className="max-w-xl mt-4 mb-8">
+        <section className="max-w-6xl mx-auto pb-12 px-4 md:px-8">
+            <h2 className="font-amstelvar text-2xl md:text-3xl max-w-xs md:max-w-xl">FAQ</h2>
+            <p className="max-w-xs md:max-w-xl text-sm md:text-base mt-4 mb-8">
                 Find answers to frequently asked questions about Savr and how we help you manage your finances effortlessly.
             </p>
 
@@ -31,7 +31,7 @@ export default function Faq() {
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="origin-left">
-                        <p className="pl-6 pr-2 text-secondary0 dark:text-zinc-400">
+                        <p className="text-sm md:text-base pl-6 pr-2 text-secondary0 dark:text-zinc-400">
                             Savr is a financial planning and management application that helps you record income, expenses, set financial goals, and
                             track your financial progress, all in one easy-to-use platform.
                         </p>
@@ -45,7 +45,7 @@ export default function Faq() {
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="origin-left">
-                        <p className="pl-6 pr-2 text-secondary0 dark:text-zinc-400">
+                        <p className="text-sm md:text-base pl-6 pr-2 text-secondary0 dark:text-zinc-400">
                             To start using Savr, simply sign up for a new account with your email and password. After that, you can begin adding
                             income, expenses, and setting the financial goals you want to achieve.
                         </p>
@@ -59,7 +59,7 @@ export default function Faq() {
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="origin-left">
-                        <p className="pl-6 pr-2 text-secondary0 dark:text-zinc-400">
+                        <p className="text-sm md:text-base pl-6 pr-2 text-secondary0 dark:text-zinc-400">
                             At the moment, Savr only supports the IDR (Rupiah) currency. Other currencies are not yet available.
                         </p>
                     </AccordionContent>
@@ -72,7 +72,7 @@ export default function Faq() {
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="origin-left">
-                        <p className="pl-6 pr-2 text-secondary0 dark:text-zinc-400">
+                        <p className="text-sm md:text-base pl-6 pr-2 text-secondary0 dark:text-zinc-400">
                             Yes, Savr is accessible via the web and mobile apps, so you can monitor and manage your finances anytime, anywhere.
                         </p>
                     </AccordionContent>
@@ -85,7 +85,7 @@ export default function Faq() {
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="origin-left">
-                        <p className="pl-6 pr-2 text-secondary0 dark:text-zinc-400">
+                        <p className="text-sm md:text-base pl-6 pr-2 text-secondary0 dark:text-zinc-400">
                             Currently, Savr supports manual transaction recording. A feature to connect your bank account will be available in future
                             updates.
                         </p>
@@ -99,7 +99,7 @@ export default function Faq() {
                         </div>
                     </AccordionTrigger>
                     <AccordionContent className="origin-left">
-                        <p className="pl-6 pr-2 text-secondary0 dark:text-zinc-400">
+                        <p className="text-sm md:text-base pl-6 pr-2 text-secondary0 dark:text-zinc-400">
                             Savr offers a free basic version. However, we will soon introduce a premium version with additional features that can be
                             accessed through a subscription fee.
                         </p>

@@ -11,9 +11,9 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="fixed w-full max-w-4xl top-0 left-1/2 transform -translate-x-1/2 mt-4 pl-8 pr-3 py-3 bg-zinc-300 bg-opacity-35 backdrop-blur-xl rounded-full z-50"
+            className="fixed md:w-full max-w-4xl top-0 left-1/2 transform -translate-x-1/2 mt-4 pl-8 pr-3 py-3 bg-zinc-300 bg-opacity-35 backdrop-blur-xl rounded-full z-50"
         >
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-12">
                 <h1 className="text-3xl">
                     <span className="font-amstelvar">S</span>avr
                 </h1>
