@@ -6,6 +6,7 @@ import { motion, AnimatePresence, Transition, Variants } from 'motion/react';
 import { useState, useEffect, Children } from 'react';
 import { TextEffect } from '../ui/text-effect';
 import { SpinningText } from '../ui/spinning-text';
+import { MoveRight } from 'lucide-react';
 
 type TextLoopProps = {
     children: React.ReactNode[];
@@ -47,10 +48,10 @@ export default function Hero({ children, className, interval = 2, transition = {
                 }}
             >
                 <TextEffect per="word" preset="fade" className="text-5xl text-center font-amstelvar max-w-3xl mt-28 mb-8">
-                    Catat pengeluaran, rencanakan anggaran, dan capai target finansial Anda dalam satu platform.
+                    Track your expenses, plan your budget, and achieve your financial goals all in one platform.
                 </TextEffect>
                 <TextEffect per="word" preset="fade" className="text-xl text-center">
-                    Kelola Keuangan Anda dengan Mudah dan Efisien
+                    Manage your finances easily and efficiently.
                 </TextEffect>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -58,7 +59,9 @@ export default function Hero({ children, className, interval = 2, transition = {
                     transition={{ duration: 0.5, ease: 'easeOut' }}
                     className="mt-8"
                 >
-                    <Button size="lg">Coba Sekarang</Button>
+                    <Button size="lg">
+                        Get Started <MoveRight />
+                    </Button>
                 </motion.div>
 
                 <motion.div
@@ -68,12 +71,12 @@ export default function Hero({ children, className, interval = 2, transition = {
                     className="absolute -bottom-44 left-1/2 transform -translate-x-1/2 w-full max-w-3xl h-96 bg-zinc-100 rounded-xl"
                 >
                     <SpinningText radius={5} fontSize={1.2} className="absolute right-0 top-0 font-medium leading-none font-amstelvar">
-                        {`Efisien • Terencana • Teratur •`}
+                        {`Easily • Quickly • Effectively •`}
                     </SpinningText>
                 </motion.div>
             </section>
             <h2 className="font-amstelvar text-3xl mt-52 text-center mx-auto max-w-2xl">
-                Dengan Savr, Anda dapat mengelola keuangan dengan cara yang lebih cerdas dan{' '}
+                With Savr, you can manage your finances in a way that's more{' '}
                 <span className={cn('relative inline-block whitespace-nowrap', className)}>
                     <AnimatePresence mode="popLayout" initial={false}>
                         <motion.div

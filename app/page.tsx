@@ -9,7 +9,7 @@ export default function Home() {
         <>
             <div className="relative bg-primary-foreground rounded-b-3xl z-10">
                 <Navbar />
-                <Hero children={['praktis', 'terorganisir', 'terstruktur', 'terjamin']} />
+                <Hero children={['efficient', 'simple', 'smart', 'effective']} />
                 <Feature />
                 <Faq />
             </div>

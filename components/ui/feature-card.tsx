@@ -9,7 +9,7 @@ export default function FeatureCard({ title, subtitle, icon }: { title: string; 
             <h3 className="font-amstelvar text-xl mt-2">{title}</h3>
             <p className="text-sm mt-2 mb-4">{subtitle}</p>
             <Button>
-                Lihat Contoh <MoveRight />
+                See Example <MoveRight />
             </Button>
         </div>
     );

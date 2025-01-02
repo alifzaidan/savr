@@ -30,7 +30,7 @@ export default function Navbar() {
                         </TextShimmer>
                     </div>
                     <Button size="lg" className="font-mulish">
-                        Join for free
+                        Sign in
                     </Button>
                 </div>
             </div>
