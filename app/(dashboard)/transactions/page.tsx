@@ -1,61 +1,97 @@
 'use client';
 
-import { columns, Payment } from '@/components/layout/dashboard/ColumnTable';
-import { DataTable } from '@/components/layout/dashboard/DataTable';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuPortal,
-    DropdownMenuSeparator,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Separator } from '@/components/ui/separator';
-import { DropdownMenuCheckboxItemProps } from '@radix-ui/react-dropdown-menu';
-import { ChartColumnStacked, FileUp, Filter, PlusCircle } from 'lucide-react';
+import { columns, Transaction } from '@/components/layout/dashboard/TransactionColumnTable';
+import { DataTable } from '@/components/layout/dashboard/TransactionsTable';
 import React from 'react';
 
-type Checked = DropdownMenuCheckboxItemProps['checked'];
-
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<Transaction[]> {
     return [
         {
             id: '1',
-            amount: 1200,
-            status: 'pending',
-            email: 'am@example.com',
+            date: '2022-01-01',
+            description: 'Buy some food',
+            type: 'expense',
+            category: 'food',
+            method: 'cash',
+            amount: -10000,
         },
         {
             id: '2',
-            amount: 1300,
-            status: 'pending',
-            email: 'dm@example.com',
+            date: '2022-01-02',
+            description: 'Ticket to go home',
+            type: 'expense',
+            category: 'transport',
+            method: 'bri',
+            amount: -20000,
         },
         {
             id: '3',
-            amount: 1400,
-            status: 'pending',
-            email: 'cm@example.com',
+            date: '2022-01-03',
+            description: 'Gajian',
+            type: 'income',
+            category: 'other',
+            method: 'bri',
+            amount: 30000,
+        },
+        {
+            id: '4',
+            date: '2022-01-04',
+            description: 'Buy paper',
+            type: 'expense',
+            category: 'utilities',
+            method: 'cash',
+            amount: -40000,
+        },
+        {
+            id: '5',
+            date: '2022-01-05',
+            description: 'Buy some food',
+            type: 'expense',
+            category: 'food',
+            method: 'cash',
+            amount: -50000,
+        },
+        {
+            id: '6',
+            date: '2022-01-06',
+            description: 'Ticket to go home',
+            type: 'expense',
+            category: 'transport',
+            method: 'bri',
+            amount: -60000,
+        },
+        {
+            id: '7',
+            date: '2022-01-07',
+            description: 'Gajian',
+            type: 'income',
+            category: 'other',
+            method: 'bri',
+            amount: 70000,
+        },
+        {
+            id: '8',
+            date: '2022-01-08',
+            description: 'Buy paper',
+            type: 'expense',
+            category: 'utilities',
+            method: 'cash',
+            amount: -80000,
+        },
+        {
+            id: '9',
+            date: '2022-01-09',
+            description: 'Buy some food',
+            type: 'expense',
+            category: 'food',
+            method: 'cash',
+            amount: -90000,
         },
     ];
 }
 
 export default function page() {
-    const [date, setDate] = React.useState<Date>();
-    const [moneyIn, setMoneyIn] = React.useState<Checked>(true);
-    const [moneyOut, setMoneyOut] = React.useState<Checked>(true);
-    const [food, setFood] = React.useState<Checked>(true);
-    const [transport, setTransport] = React.useState<Checked>(true);
-
-    const [data, setData] = React.useState<Payment[]>([]);
+    const [data, setData] = React.useState<Transaction[]>([]);
 
     React.useEffect(() => {
         getData().then((data) => setData(data));
@@ -63,77 +99,9 @@ export default function page() {
 
     return (
         <section className="px-4">
-            <h1 className="font-amstelvar text-3xl mb-6">Transactions</h1>
-            <div className="w-full bg-sidebar px-8 py-6 rounded-xl border border-border mb-6">
-                <div className="flex justify-between">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <Button variant="secondary" size="sm">
-                                <Filter />
-                                All filter
-                            </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent>
-                            <DropdownMenuLabel>Filter Transactions</DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuGroup>
-                                <DropdownMenuItem>
-                                    <Calendar mode="single" selected={date} onSelect={setDate} initialFocus />
-                                </DropdownMenuItem>
-                                <DropdownMenuCheckboxItem checked={moneyIn} onCheckedChange={setMoneyIn}>
-                                    Money In
-                                </DropdownMenuCheckboxItem>
-                                <DropdownMenuCheckboxItem checked={moneyOut} onCheckedChange={setMoneyOut}>
-                                    Money Out
-                                </DropdownMenuCheckboxItem>
-                                <DropdownMenuSub>
-                                    <DropdownMenuSubTrigger>
-                                        <ChartColumnStacked />
-                                        <span>Category</span>
-                                    </DropdownMenuSubTrigger>
-                                    <DropdownMenuPortal>
-                                        <DropdownMenuSubContent>
-                                            <DropdownMenuCheckboxItem checked={food} onCheckedChange={setFood}>
-                                                Food
-                                            </DropdownMenuCheckboxItem>
-                                            <DropdownMenuCheckboxItem checked={transport} onCheckedChange={setTransport}>
-                                                Transport
-                                            </DropdownMenuCheckboxItem>
-                                            <DropdownMenuSeparator />
-                                            <DropdownMenuItem>
-                                                <PlusCircle />
-                                                <span>Add Category</span>
-                                            </DropdownMenuItem>
-                                        </DropdownMenuSubContent>
-                                    </DropdownMenuPortal>
-                                </DropdownMenuSub>
-                            </DropdownMenuGroup>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
-                    <Button size="sm">
-                        <FileUp />
-                        Export
-                    </Button>
-                </div>
-                <Separator className="my-4" />
-                <div className="flex gap-12">
-                    <div>
-                        <p className="text-sm opacity-50">Money in</p>
-                        <h5 className="text-2xl font-semibold">Rp. 100.000</h5>
-                    </div>
-                    <div>
-                        <p className="text-sm opacity-50">Money out</p>
-                        <h5 className="text-2xl font-semibold">Rp. 50.000</h5>
-                    </div>
-                    <div>
-                        <p className="text-sm opacity-50">Total Number</p>
-                        <h5 className="text-2xl font-semibold">40</h5>
-                    </div>
-                </div>
-            </div>
-            <div className="w-full bg-sidebar px-8 py-6 rounded-xl border border-border">
-                <DataTable columns={columns} data={data} />
-            </div>
+            <h1 className="font-amstelvar text-3xl mb-2 ml-4">Transactions</h1>
+            <p className="mb-6 opacity-80 text-sm ml-4">View your transaction history effortlessly and stay on top of your finances.</p>
+            <DataTable columns={columns} data={data} />
         </section>
     );
 }
