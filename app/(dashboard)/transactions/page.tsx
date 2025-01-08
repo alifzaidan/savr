@@ -98,7 +98,7 @@ export default function page() {
     }, []);
 
     return (
-        <section className="px-4">
+        <section className="px-4 md:px-6">
             <h1 className="font-amstelvar text-3xl mb-2 ml-4">Transactions</h1>
             <p className="mb-6 opacity-80 text-sm ml-4">View your transaction history effortlessly and stay on top of your finances.</p>
             <DataTable columns={columns} data={data} />
