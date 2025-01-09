@@ -17,7 +17,7 @@ export default function page() {
 
                 <Card>
                     <div className="flex items-center justify-center h-full py-24">
-                        <Plus size={48} className="text-muted-foreground" />
+                        <Plus size={40} className="text-muted-foreground" />
                     </div>
                 </Card>
             </div>

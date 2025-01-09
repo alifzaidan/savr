@@ -18,16 +18,16 @@ import {
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-import { DataTablePagination } from './TransactionTablePagination';
+import { DataTablePagination } from './DataTablePagination';
 import { DataTableToolbar } from './TransactionsTableToolbar';
 import { Separator } from '@/components/ui/separator';
 
-interface DataTableProps<TData, TValue> {
+interface TransactionsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
 }
 
-export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
+export function TransactionsTable<TData, TValue>({ columns, data }: TransactionsTableProps<TData, TValue>) {
     const [rowSelection, setRowSelection] = React.useState({});
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);

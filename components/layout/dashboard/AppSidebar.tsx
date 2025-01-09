@@ -45,8 +45,8 @@ const data = {
             icon: Goal,
         },
         {
-            title: 'E-wallet',
-            url: '/e-wallet',
+            title: 'Wallet',
+            url: '/wallet',
             icon: WalletCards,
         },
         {

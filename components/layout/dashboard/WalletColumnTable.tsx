@@ -6,54 +6,39 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
-export type Transaction = {
+export type Wallet = {
     id: string;
-    date: string;
-    description: string;
-    type: 'income' | 'expense';
-    category: 'food' | 'transport' | 'utilities' | 'trip' | 'other';
-    method: 'cash' | 'bri' | 'shopeepay' | 'gopay' | 'ovo' | 'dana';
+    name: string;
+    accountName: string;
+    lastTransaction: string;
     amount: number;
 };
 
-export const columns: ColumnDef<Transaction>[] = [
+export const columns: ColumnDef<Wallet>[] = [
     {
-        accessorKey: 'date',
+        accessorKey: 'name',
         header: ({ column }) => {
             return (
                 <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    Date
+                    Name
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
         },
-    },
-    {
-        accessorKey: 'description',
-        header: 'Description',
-    },
-    {
-        accessorKey: 'type',
-        header: 'Type',
         cell: ({ row }) => {
-            const type = row.getValue('type');
-            const variant = type === 'income' ? 'secondary' : 'default';
-            return <Badge variant={variant}>{type === 'income' ? 'Income' : 'Expense'}</Badge>;
+            return <Badge>{row.getValue('name')}</Badge>;
         },
     },
     {
-        accessorKey: 'category',
-        header: 'Category',
+        accessorKey: 'accountName',
+        header: 'Account Name',
         cell: ({ row }) => {
-            return <p className="capitalize">{row.getValue('category')}</p>;
+            return <Badge variant={'secondary'}>{row.getValue('accountName')}</Badge>;
         },
     },
     {
-        accessorKey: 'method',
-        header: 'Method',
-        cell: ({ row }) => {
-            return <p className="capitalize">{row.getValue('method')}</p>;
-        },
+        accessorKey: 'lastTransaction',
+        header: 'Last Transaction',
     },
     {
         accessorKey: 'amount',
@@ -85,8 +70,8 @@ export const columns: ColumnDef<Transaction>[] = [
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
-                        <DropdownMenuItem>See Detail</DropdownMenuItem>
-                        <DropdownMenuItem className="text-green-700">Edit</DropdownMenuItem>
+                        <DropdownMenuItem>Manage</DropdownMenuItem>
+                        <DropdownMenuItem>Limit</DropdownMenuItem>
                         <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
