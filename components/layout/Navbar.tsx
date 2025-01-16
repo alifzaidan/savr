@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Button } from '../ui/button';
 import { TextShimmer } from '../ui/text-shimmer';
 import { motion } from 'motion/react';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 
 export default function Navbar() {
     return (
@@ -29,9 +30,14 @@ export default function Navbar() {
                             Free
                         </TextShimmer>
                     </div>
-                    <Button size="lg" className="font-mulish">
-                        Sign in
-                    </Button>
+                    <SignedOut>
+                        <Button size="lg" className="font-mulish">
+                            <SignInButton />
+                        </Button>
+                    </SignedOut>
+                    <SignedIn>
+                        <UserButton />
+                    </SignedIn>
                 </div>
             </div>
         </motion.nav>
