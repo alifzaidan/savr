@@ -1,17 +1,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { EllipsisVertical } from 'lucide-react';
-import Image from 'next/image';
 
-export default function WalletCard() {
+export default function WalletCard({ name, account_name }: { name: string; account_name: string }) {
     return (
-        <Card>
+        <Card className="w-60">
             <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                    <p>BRI</p>
+                    <p>{name}</p>
                     <EllipsisVertical size={16} />
                 </CardTitle>
-                <CardDescription>1234 5678 9012 3456</CardDescription>
+                <CardDescription>{account_name}</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="flex justify-between">

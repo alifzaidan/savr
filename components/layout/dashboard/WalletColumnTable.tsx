@@ -26,7 +26,7 @@ export const columns: ColumnDef<Wallet>[] = [
             );
         },
         cell: ({ row }) => {
-            return <Badge>{row.getValue('name')}</Badge>;
+            return <Badge className="ml-2">{row.getValue('name')}</Badge>;
         },
     },
     {

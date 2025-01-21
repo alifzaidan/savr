@@ -19,9 +19,6 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import { DataTablePagination } from './DataTablePagination';
-import WalletCard from './WalletCard';
-import { Card } from '@/components/ui/card';
-import { Plus } from 'lucide-react';
 
 interface WalletTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
