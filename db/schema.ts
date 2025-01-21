@@ -2,10 +2,11 @@ import { text, serial, pgTable, timestamp, integer } from 'drizzle-orm/pg-core';
 
 export const UsersTable = pgTable('users', {
     id: serial('id').primaryKey().notNull(),
-    name: text('name').notNull(),
+    firstName: text('first_name').notNull(),
+    lastName: text('last_name').notNull(),
     username: text('username').notNull(),
     email: text('email').notNull(),
-    password: text('password').notNull(),
+    photo: text('photo').notNull(),
     created_at: timestamp('created_at').defaultNow(),
 });
 
