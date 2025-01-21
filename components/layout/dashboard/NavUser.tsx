@@ -1,8 +1,7 @@
 'use client';
 
-import { BadgeCheck, Bell, CreditCard, DotIcon, LogOut, Sparkles } from 'lucide-react';
+import { BadgeCheck, Bell, CreditCard, LogOut, Sparkles } from 'lucide-react';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
 import { SignOutButton, UserButton } from '@clerk/nextjs';
+import React from 'react';
 
 export function NavUser({
     user,
@@ -21,7 +21,6 @@ export function NavUser({
     user: {
         name: string;
         email: string;
-        avatar: string;
     };
 }) {
     const { isMobile } = useSidebar();
@@ -35,11 +34,7 @@ export function NavUser({
                             size="lg"
                             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground ring-primary"
                         >
-                            <UserButton>
-                                <UserButton.MenuItems>
-                                    <UserButton.Action label="Open chat" labelIcon={<DotIcon />} onClick={() => alert('init chat')} />
-                                </UserButton.MenuItems>
-                            </UserButton>
+                            <UserButton />
                             <div className="grid flex-1 text-left text-sm leading-tight">
                                 <span className="truncate font-semibold">{user.name}</span>
                                 <span className="truncate text-xs">{user.email}</span>

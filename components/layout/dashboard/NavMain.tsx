@@ -19,8 +19,8 @@ export function NavMain({
         <SidebarGroup>
             <SidebarGroupLabel>Welcome back!</SidebarGroupLabel>
             <SidebarMenu>
-                {items.map((item) => (
-                    <SidebarMenuItem>
+                {items.map((item, index) => (
+                    <SidebarMenuItem key={index}>
                         <SidebarMenuButton tooltip={item.title} asChild>
                             <Link href={item.url}>
                                 {item.icon && <item.icon />}

@@ -8,56 +8,67 @@ import { AccountSwitcher } from './AccountSwitcher';
 import { NavMain } from './NavMain';
 import { NavUser } from './NavUser';
 import { Separator } from '@/components/ui/separator';
-
-const data = {
-    user: {
-        name: 'Muchammad Alif Zaidan',
-        email: 'zaidanalif22710@gmail.com',
-        avatar: '/avatars/shadcn.jpg',
-    },
-    teams: [
-        {
-            name: 'Personal',
-            logo: User,
-            plan: 'Rp. 100.000',
-        },
-        {
-            name: 'Shared',
-            logo: Users,
-            plan: '-',
-        },
-    ],
-    navMain: [
-        {
-            title: 'Dashboard',
-            url: '/dashboard',
-            icon: LayoutDashboard,
-            isActive: true,
-        },
-        {
-            title: 'Transactions',
-            url: '/transactions',
-            icon: CircleDollarSign,
-        },
-        {
-            title: 'Goals',
-            url: '/goals',
-            icon: Goal,
-        },
-        {
-            title: 'Wallet',
-            url: '/wallet',
-            icon: WalletCards,
-        },
-        {
-            title: 'Analytics',
-            url: '/analytics',
-            icon: ChartArea,
-        },
-    ],
-};
+import { getUserData } from '@/db/actions';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const [userData, setUserData] = React.useState({ name: '', email: '' });
+
+    React.useEffect(() => {
+        async function fetchData() {
+            const users = await getUserData(1);
+            const user = users[0];
+            setUserData({ name: user.firstName + ' ' + user.lastName, email: user.email });
+        }
+        fetchData();
+    }, []);
+
+    const data = {
+        user: {
+            name: userData.name,
+            email: userData.email,
+        },
+        teams: [
+            {
+                name: 'Personal',
+                logo: User,
+                plan: 'Rp. 100.000',
+            },
+            {
+                name: 'Shared',
+                logo: Users,
+                plan: '-',
+            },
+        ],
+        navMain: [
+            {
+                title: 'Dashboard',
+                url: '/dashboard',
+                icon: LayoutDashboard,
+                isActive: true,
+            },
+            {
+                title: 'Transactions',
+                url: '/transactions',
+                icon: CircleDollarSign,
+            },
+            {
+                title: 'Goals',
+                url: '/goals',
+                icon: Goal,
+            },
+            {
+                title: 'Wallet',
+                url: '/wallet',
+                icon: WalletCards,
+            },
+            {
+                title: 'Analytics',
+                url: '/analytics',
+                icon: ChartArea,
+            },
+        ],
+    };
+
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
