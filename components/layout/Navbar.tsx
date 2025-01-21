@@ -32,7 +32,7 @@ export default function Navbar() {
                     </div>
                     <SignedOut>
                         <Button size="lg" className="font-mulish">
-                            <SignInButton />
+                            <SignInButton mode="modal" />
                         </Button>
                     </SignedOut>
                     <SignedIn>
