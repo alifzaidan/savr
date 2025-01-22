@@ -9,10 +9,10 @@ import {
     getTotalIndividualIncomes,
     getTotalIndividualTransactions,
 } from '@/db/actions/individualTransactions';
-import { formatDate } from '@/lib/utils';
 import React from 'react';
 import { Transaction } from '@/components/layout/dashboard/TransactionColumnTable';
 import { format } from 'date-fns';
+import { getWalletsName } from '@/db/actions/wallet';
 
 export default function page() {
     const [transactionData, setTransactionData] = React.useState<Transaction[]>([]);
@@ -26,6 +26,7 @@ export default function page() {
     React.useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
+            const walletMap = await getWalletsName();
             const transactions = await getAllIndividualTransactions();
             const formattedTransactions = transactions.map((transaction) => ({
                 id: transaction.id.toString(),
@@ -33,7 +34,7 @@ export default function page() {
                 description: transaction.description,
                 type: transaction.type,
                 category: transaction.category,
-                method: transaction.wallet_id.toString(),
+                method: walletMap[transaction.wallet_id] || 'Unknown',
                 amount: transaction.amount,
             }));
             setTransactionData(formattedTransactions);
@@ -54,16 +55,8 @@ export default function page() {
             <section className="px-4 md:px-6 mb-4">
                 <Skeleton className="h-12 w-[250px] mb-2" />
                 <Skeleton className="h-5 w-[500px] mb-6" />
-                <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-4">
-                    <Skeleton className="h-36" />
-                    <Skeleton className="h-36" />
-                    <Skeleton className="h-36" />
-                    <Skeleton className="h-36" />
-                </div>
-                <div className="grid gap-4 md:grid-cols-1 lg:grid-cols-2">
-                    <Skeleton className="h-72" />
-                    <Skeleton className="h-72" />
-                </div>
+                <Skeleton className="h-36 w-full mb-6" />
+                <Skeleton className="h-72 w-full" />
             </section>
         );
     }

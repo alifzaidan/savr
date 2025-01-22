@@ -78,7 +78,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
                 {isLoading ? (
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center space-x-2 p-2">
                         <Skeleton className="h-8 w-8 rounded-full" />
                         <div className="space-y-2 w-3/4">
                             <Skeleton className="h-4" />

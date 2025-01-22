@@ -1,29 +1,20 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { formatRupiah } from '@/lib/utils';
+import { Transaction } from './TransactionColumnTable';
 
-export function RecentTransaction() {
+export function RecentTransaction({ data }: { data: Transaction[] }) {
     return (
         <div className="space-y-8">
-            <div className="flex items-center">
-                <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">Beli Gacoan</p>
-                    <p className="text-sm text-muted-foreground">Makanan</p>
+            {data.map((transaction, index) => (
+                <div key={index} className="flex items-center">
+                    <div className="space-y-1">
+                        <p className="text-sm font-medium leading-none">{transaction.description}</p>
+                        <p className="text-sm text-muted-foreground">{transaction.category}</p>
+                    </div>
+                    <div className={`ml-auto font-medium ${transaction.type === 'Income' ? 'text-green-600' : ''}`}>
+                        {transaction.type === 'Income' ? `+${formatRupiah(transaction.amount)}` : `-${formatRupiah(transaction.amount)}`}
+                    </div>
                 </div>
-                <div className="ml-auto font-medium">-Rp. 20.000</div>
-            </div>
-            <div className="flex items-center">
-                <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">Beli Monitor</p>
-                    <p className="text-sm text-muted-foreground">Kebutuhan</p>
-                </div>
-                <div className="ml-auto font-medium">-Rp. 800.000</div>
-            </div>
-            <div className="flex items-center">
-                <div className="space-y-1">
-                    <p className="text-sm font-medium leading-none">Gajian</p>
-                    <p className="text-sm text-muted-foreground">Other</p>
-                </div>
-                <div className="ml-auto font-medium">+Rp. 1.000.000</div>
-            </div>
+            ))}
         </div>
     );
 }

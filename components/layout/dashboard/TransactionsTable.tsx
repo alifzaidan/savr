@@ -22,6 +22,8 @@ import { DataTablePagination } from './DataTablePagination';
 import { DataTableToolbar } from './TransactionsTableToolbar';
 import { Separator } from '@/components/ui/separator';
 import { formatRupiah } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
 
 interface TransactionsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -70,19 +72,25 @@ export function TransactionsTable<TData, TValue>({
             <div className="w-full bg-sidebar flex flex-col px-8 py-6 rounded-xl border border-border mb-6">
                 <DataTableToolbar table={table} />
                 <Separator className="my-4" />
-                <div className="flex items-center justify-center lg:justify-start gap-8 md:gap-16 order-first md:order-last text-center lg:text-left">
-                    <div>
-                        <p className="text-xs md:text-sm opacity-50">Money in</p>
-                        <h5 className="text-2xl md:text-3xl font-semibold">{formatRupiah(totalIncome)}</h5>
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 order-first md:order-last">
+                    <div className="flex items-center justify-center lg:justify-start gap-8 md:gap-16 text-center lg:text-left">
+                        <div>
+                            <p className="text-xs md:text-sm opacity-50">Money in</p>
+                            <h5 className="text-2xl md:text-3xl font-semibold">{formatRupiah(totalIncome)}</h5>
+                        </div>
+                        <div>
+                            <p className="text-xs md:text-sm opacity-50">Money out</p>
+                            <h5 className="text-2xl md:text-3xl font-semibold">{formatRupiah(totalExpense)}</h5>
+                        </div>
+                        <div>
+                            <p className="text-xs md:text-sm opacity-50">Total Transaction</p>
+                            <h5 className="text-2xl md:text-3xl font-semibold">{totalTransaction}</h5>
+                        </div>
                     </div>
-                    <div>
-                        <p className="text-xs md:text-sm opacity-50">Money out</p>
-                        <h5 className="text-2xl md:text-3xl font-semibold">{formatRupiah(totalExpense)}</h5>
-                    </div>
-                    <div>
-                        <p className="text-xs md:text-sm opacity-50">Total Transaction</p>
-                        <h5 className="text-2xl md:text-3xl font-semibold">{totalTransaction}</h5>
-                    </div>
+                    <Button variant="default" size="sm">
+                        <Plus />
+                        Add Transaction
+                    </Button>
                 </div>
             </div>
             <div className="w-full bg-sidebar px-8 py-6 space-y-4 rounded-xl border border-border">
