@@ -6,21 +6,41 @@ import { RecentTransaction } from '@/components/layout/dashboard/RecentTransacti
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TransitionPanel } from '@/components/ui/transition-panel';
-import { getUserData } from '@/db/actions';
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
+import { formatRupiah } from '@/lib/utils';
+import { getTotalIndividualExpenses, getTotalIndividualIncomes, getTotalIndividualTransactions } from '@/db/actions/individualTransactions';
+import { getUserData } from '@/db/actions/users';
+import { getIndividualAccount } from '@/db/actions/individualAccounts';
 
 export default function page() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [userData, setUserData] = React.useState({ name: '', email: '' });
+    const [balance, setBalance] = React.useState(0);
+    const [totalIncome, setTotalIncome] = React.useState(0);
+    const [totalExpense, setTotalExpense] = React.useState(0);
+    const [totalTransaction, setTotalTransaction] = React.useState(0);
     const [isLoading, setIsLoading] = React.useState(true);
+
+    const userId = 1;
 
     React.useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
-            const users = await getUserData(1);
+            const users = await getUserData(userId);
             const user = users[0];
             setUserData({ name: user.firstName, email: user.email });
+            const account = await getIndividualAccount(userId);
+            if (account.length > 0) {
+                setBalance(account[0].balance);
+            }
+            const income = await getTotalIndividualIncomes(userId);
+            setTotalIncome(Number(income));
+            const expense = await getTotalIndividualExpenses(userId);
+            setTotalExpense(Number(expense));
+            const transaction = await getTotalIndividualTransactions(userId);
+            setTotalTransaction(Number(transaction));
+
             setIsLoading(false);
         }
         fetchData();
@@ -71,7 +91,7 @@ export default function page() {
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
                         <div className="p-2">
                             <div className="text-sm font-medium mb-4">Balance</div>
-                            <div className="text-4xl font-bold">$60,231.89</div>
+                            <div className="text-4xl font-bold">{formatRupiah(balance)}</div>
                         </div>
 
                         <Card>
@@ -91,7 +111,7 @@ export default function page() {
                                 </svg>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">+$45,231.89</div>
+                                <div className="text-2xl font-bold">+{formatRupiah(totalIncome)}</div>
                                 <p className="text-xs text-muted-foreground">+20.1% from last month</p>
                             </CardContent>
                         </Card>
@@ -114,7 +134,7 @@ export default function page() {
                                 </svg>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">-$2,350.78</div>
+                                <div className="text-2xl font-bold">-{formatRupiah(totalExpense)}</div>
                                 <p className="text-xs text-muted-foreground">-80.1% from last month</p>
                             </CardContent>
                         </Card>
@@ -136,7 +156,7 @@ export default function page() {
                                 </svg>
                             </CardHeader>
                             <CardContent>
-                                <div className="text-2xl font-bold">129</div>
+                                <div className="text-2xl font-bold">{totalTransaction}</div>
                                 <p className="text-xs text-muted-foreground">+19% from last month</p>
                             </CardContent>
                         </Card>

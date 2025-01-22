@@ -5,7 +5,7 @@ import { columns, Wallet } from '@/components/layout/dashboard/WalletColumnTable
 import { WalletTable } from '@/components/layout/dashboard/WalletTable';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { getAllWallet } from '@/db/actions';
+import { getAllWallet } from '@/db/actions/wallet';
 import { formatDate } from '@/lib/utils';
 import { Plus } from 'lucide-react';
 import React from 'react';

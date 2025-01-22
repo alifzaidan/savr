@@ -3,7 +3,7 @@
 import GoalsCard from '@/components/layout/dashboard/GoalsCard';
 import { Card } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { getAllIndividualGoals } from '@/db/actions';
+import { getAllIndividualGoals } from '@/db/actions/individualGoals';
 import { formatDate } from '@/lib/utils';
 import { Plus } from 'lucide-react';
 import React from 'react';

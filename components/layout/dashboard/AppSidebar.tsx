@@ -8,16 +8,21 @@ import { AccountSwitcher } from './AccountSwitcher';
 import { NavMain } from './NavMain';
 import { NavUser } from './NavUser';
 import { Separator } from '@/components/ui/separator';
-import { getUserData } from '@/db/actions';
+import { getUserData } from '@/db/actions/users';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const [userData, setUserData] = React.useState({ name: '', email: '' });
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         async function fetchData() {
+            setIsLoading(true);
             const users = await getUserData(1);
             const user = users[0];
             setUserData({ name: user.firstName + ' ' + user.lastName, email: user.email });
+
+            setIsLoading(false);
         }
         fetchData();
     }, []);
@@ -72,7 +77,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     return (
         <Sidebar collapsible="icon" {...props}>
             <SidebarHeader>
-                <NavUser user={data.user} />
+                {isLoading ? (
+                    <div className="flex items-center space-x-2">
+                        <Skeleton className="h-8 w-8 rounded-full" />
+                        <div className="space-y-2 w-3/4">
+                            <Skeleton className="h-4" />
+                            <Skeleton className="h-3" />
+                        </div>
+                    </div>
+                ) : (
+                    <NavUser user={data.user} />
+                )}
             </SidebarHeader>
             <Separator />
             <SidebarContent>
