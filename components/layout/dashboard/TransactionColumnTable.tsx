@@ -10,13 +10,13 @@ export type Transaction = {
     id: string;
     date: string;
     description: string;
-    type: 'income' | 'expense';
-    category: 'food' | 'transport' | 'utilities' | 'trip' | 'other';
-    method: 'cash' | 'bri' | 'shopeepay' | 'gopay' | 'ovo' | 'dana';
+    type: string;
+    category: string;
+    method: string;
     amount: number;
 };
 
-export const columns: ColumnDef<Transaction>[] = [
+export const columns: ColumnDef<Transaction, unknown>[] = [
     {
         accessorKey: 'date',
         header: ({ column }) => {
@@ -37,8 +37,8 @@ export const columns: ColumnDef<Transaction>[] = [
         header: 'Type',
         cell: ({ row }) => {
             const type = row.getValue('type');
-            const variant = type === 'income' ? 'secondary' : 'default';
-            return <Badge variant={variant}>{type === 'income' ? 'Income' : 'Expense'}</Badge>;
+            const variant = type === 'Income' ? 'secondary' : 'default';
+            return <Badge variant={variant}>{type === 'Income' ? 'Income' : 'Expense'}</Badge>;
         },
     },
     {
@@ -68,9 +68,9 @@ export const columns: ColumnDef<Transaction>[] = [
                 maximumFractionDigits: 0,
             }).format(value);
 
-            const colorClass = type === 'income' ? 'text-green-600' : '';
+            const colorClass = type === 'Income' ? 'text-green-600' : '';
 
-            return <p className={`font-bold ${colorClass}`}>{formattedValue}</p>;
+            return <p className={`font-bold ${colorClass}`}>{type === 'Income' ? `+${formattedValue}` : `-${formattedValue}`}</p>;
         },
     },
     {

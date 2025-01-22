@@ -21,13 +21,23 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { DataTablePagination } from './DataTablePagination';
 import { DataTableToolbar } from './TransactionsTableToolbar';
 import { Separator } from '@/components/ui/separator';
+import { formatRupiah } from '@/lib/utils';
 
 interface TransactionsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    totalIncome: number;
+    totalExpense: number;
+    totalTransaction: number;
 }
 
-export function TransactionsTable<TData, TValue>({ columns, data }: TransactionsTableProps<TData, TValue>) {
+export function TransactionsTable<TData, TValue>({
+    columns,
+    data,
+    totalIncome,
+    totalExpense,
+    totalTransaction,
+}: TransactionsTableProps<TData, TValue>) {
     const [rowSelection, setRowSelection] = React.useState({});
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -63,15 +73,15 @@ export function TransactionsTable<TData, TValue>({ columns, data }: Transactions
                 <div className="flex items-center justify-center lg:justify-start gap-8 md:gap-16 order-first md:order-last text-center lg:text-left">
                     <div>
                         <p className="text-xs md:text-sm opacity-50">Money in</p>
-                        <h5 className="text-2xl md:text-3xl font-semibold">Rp. 100.000</h5>
+                        <h5 className="text-2xl md:text-3xl font-semibold">{formatRupiah(totalIncome)}</h5>
                     </div>
                     <div>
                         <p className="text-xs md:text-sm opacity-50">Money out</p>
-                        <h5 className="text-2xl md:text-3xl font-semibold">Rp. 50.000</h5>
+                        <h5 className="text-2xl md:text-3xl font-semibold">{formatRupiah(totalExpense)}</h5>
                     </div>
                     <div>
                         <p className="text-xs md:text-sm opacity-50">Total Transaction</p>
-                        <h5 className="text-2xl md:text-3xl font-semibold">40</h5>
+                        <h5 className="text-2xl md:text-3xl font-semibold">{totalTransaction}</h5>
                     </div>
                 </div>
             </div>

@@ -2,7 +2,11 @@
 
 import { IndividualTransactionsTable } from '../schema';
 import { db } from '..';
-import { and, count, eq, sum } from 'drizzle-orm';
+import { and, asc, count, eq, sum } from 'drizzle-orm';
+
+export const getAllIndividualTransactions = async () => {
+    return await db.select().from(IndividualTransactionsTable).orderBy(asc(IndividualTransactionsTable.created_at));
+};
 
 export async function getTotalIndividualIncomes(accountId: number) {
     const totalIncomes = await db
