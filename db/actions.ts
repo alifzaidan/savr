@@ -1,7 +1,7 @@
 'use server';
 
 import { CreateUserParams } from '@/types';
-import { UsersTable, WalletTable } from './schema';
+import { IndividualAccountsTable, IndividualGoalsTable, UsersTable, WalletTable } from './schema';
 import { db } from '.';
 import { handleError } from '@/lib/utils';
 import { asc, eq } from 'drizzle-orm';
@@ -26,6 +26,15 @@ export async function getUserData(userId: number) {
     const user = await db.select().from(UsersTable).where(eq(UsersTable.id, userId));
     return user;
 }
+
+export async function getIndividualAccount(userId: number) {
+    const account = await db.select().from(IndividualAccountsTable).where(eq(IndividualAccountsTable.user_id, userId));
+    return account;
+}
+
+export const getAllIndividualGoals = async () => {
+    return await db.select().from(IndividualGoalsTable).orderBy(asc(IndividualGoalsTable.created_at));
+};
 
 export const getAllWallet = async () => {
     return await db.select().from(WalletTable).orderBy(asc(WalletTable.created_at));
