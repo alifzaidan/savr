@@ -21,8 +21,10 @@ import { Transaction } from '@/components/layout/dashboard/TransactionColumnTabl
 import { getWalletsName } from '@/db/actions/wallet';
 import { format } from 'date-fns';
 import { Banknote, HandCoins } from 'lucide-react';
+import { useUser } from '@clerk/nextjs';
 
 export default function page() {
+    const { user } = useUser();
     const [activeIndex, setActiveIndex] = useState(0);
     const [userData, setUserData] = React.useState({ name: '', email: '' });
     const [balance, setBalance] = React.useState(0);
@@ -32,24 +34,24 @@ export default function page() {
     const [transactionData, setTransactionData] = React.useState<Transaction[]>([]);
     const [isLoading, setIsLoading] = React.useState(true);
 
-    const userId = 1;
-
     React.useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
-            const users = await getUserData(userId);
-            const user = users[0];
-            setUserData({ name: user.firstName, email: user.email });
-            const account = await getIndividualAccount(userId);
-            if (account.length > 0) {
-                setBalance(account[0].balance);
+            // const users = await getUserData(userId);
+            // const user = users[0];
+            if (user) {
+                setUserData({ name: user.firstName || '', email: user.emailAddresses[0].emailAddress || '' });
+                const account = await getIndividualAccount(user?.id);
+                if (account.length > 0) {
+                    setBalance(account[0].balance);
+                }
+                const income = await getTotalIndividualIncomes(user?.id);
+                setTotalIncome(Number(income));
+                const expense = await getTotalIndividualExpenses(user?.id);
+                setTotalExpense(Number(expense));
+                const transaction = await getTotalIndividualTransactions(user?.id);
+                setTotalTransaction(Number(transaction));
             }
-            const income = await getTotalIndividualIncomes(userId);
-            setTotalIncome(Number(income));
-            const expense = await getTotalIndividualExpenses(userId);
-            setTotalExpense(Number(expense));
-            const transaction = await getTotalIndividualTransactions(userId);
-            setTotalTransaction(Number(transaction));
 
             const walletMap = await getWalletsName();
             const transactions = await getAllIndividualTransactions();

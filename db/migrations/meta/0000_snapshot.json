@@ -1,5 +1,5 @@
 {
-  "id": "338a05b8-17fc-4710-a9ca-71a947268164",
+  "id": "522e922c-ba0c-4120-a9f7-2c7cba824443",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,13 +10,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
         "user_id": {
           "name": "user_id",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -70,13 +70,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
-        "account_id": {
-          "name": "account_id",
-          "type": "integer",
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -121,12 +121,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "individual_goals_account_id_individual_accounts_id_fk": {
-          "name": "individual_goals_account_id_individual_accounts_id_fk",
+        "individual_goals_user_id_individual_accounts_id_fk": {
+          "name": "individual_goals_user_id_individual_accounts_id_fk",
           "tableFrom": "individual_goals",
           "tableTo": "individual_accounts",
           "columnsFrom": [
-            "account_id"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -147,13 +147,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
-        "account_id": {
-          "name": "account_id",
-          "type": "integer",
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -204,12 +204,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "individual_transactions_account_id_individual_accounts_id_fk": {
-          "name": "individual_transactions_account_id_individual_accounts_id_fk",
+        "individual_transactions_user_id_individual_accounts_id_fk": {
+          "name": "individual_transactions_user_id_individual_accounts_id_fk",
           "tableFrom": "individual_transactions",
           "tableTo": "individual_accounts",
           "columnsFrom": [
-            "account_id"
+            "user_id"
           ],
           "columnsTo": [
             "id"
@@ -243,7 +243,7 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "text",
           "primaryKey": true,
           "notNull": true
         },
@@ -299,13 +299,13 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "serial",
+          "type": "uuid",
           "primaryKey": true,
           "notNull": true
         },
-        "account_id": {
-          "name": "account_id",
-          "type": "integer",
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -344,12 +344,12 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "wallet_account_id_individual_accounts_id_fk": {
-          "name": "wallet_account_id_individual_accounts_id_fk",
+        "wallet_user_id_individual_accounts_id_fk": {
+          "name": "wallet_user_id_individual_accounts_id_fk",
           "tableFrom": "wallet",
           "tableTo": "individual_accounts",
           "columnsFrom": [
-            "account_id"
+            "user_id"
           ],
           "columnsTo": [
             "id"

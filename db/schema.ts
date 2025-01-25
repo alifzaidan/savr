@@ -1,8 +1,7 @@
-import { text, serial, pgTable, timestamp, integer } from 'drizzle-orm/pg-core';
+import { text, serial, pgTable, timestamp, integer, uuid } from 'drizzle-orm/pg-core';
 
 export const UsersTable = pgTable('users', {
-    id: serial('id').primaryKey().notNull(),
-    clerkId: text('clerk_id').notNull(),
+    id: text('id').primaryKey().notNull(),
     firstName: text('first_name').notNull(),
     lastName: text('last_name').notNull(),
     username: text('username').notNull(),
@@ -12,8 +11,8 @@ export const UsersTable = pgTable('users', {
 });
 
 export const IndividualAccountsTable = pgTable('individual_accounts', {
-    id: serial('id').primaryKey().notNull(),
-    user_id: integer('user_id')
+    id: uuid('id').primaryKey().notNull(),
+    user_id: text('user_id')
         .notNull()
         .references(() => UsersTable.id),
     balance: integer('balance').notNull().default(0),
@@ -22,8 +21,8 @@ export const IndividualAccountsTable = pgTable('individual_accounts', {
 });
 
 export const IndividualTransactionsTable = pgTable('individual_transactions', {
-    id: serial('id').primaryKey().notNull(),
-    account_id: integer('account_id')
+    id: uuid('id').primaryKey().notNull(),
+    user_id: text('user_id')
         .notNull()
         .references(() => IndividualAccountsTable.id),
     wallet_id: integer('wallet_id')
@@ -38,8 +37,8 @@ export const IndividualTransactionsTable = pgTable('individual_transactions', {
 });
 
 export const WalletTable = pgTable('wallet', {
-    id: serial('id').primaryKey().notNull(),
-    account_id: integer('account_id')
+    id: uuid('id').primaryKey().notNull(),
+    user_id: text('user_id')
         .notNull()
         .references(() => IndividualAccountsTable.id),
     name: text('name').notNull(),
@@ -50,8 +49,8 @@ export const WalletTable = pgTable('wallet', {
 });
 
 export const IndividualGoalsTable = pgTable('individual_goals', {
-    id: serial('id').primaryKey().notNull(),
-    account_id: integer('account_id')
+    id: uuid('id').primaryKey().notNull(),
+    user_id: text('user_id')
         .notNull()
         .references(() => IndividualAccountsTable.id),
     target: integer('target').notNull(),

@@ -13,15 +13,15 @@ import React from 'react';
 import { Transaction } from '@/components/layout/dashboard/TransactionColumnTable';
 import { format } from 'date-fns';
 import { getWalletsName } from '@/db/actions/wallet';
+import { useUser } from '@clerk/nextjs';
 
 export default function page() {
+    const { user } = useUser();
     const [transactionData, setTransactionData] = React.useState<Transaction[]>([]);
     const [totalIncome, setTotalIncome] = React.useState(0);
     const [totalExpense, setTotalExpense] = React.useState(0);
     const [totalTransaction, setTotalTransaction] = React.useState(0);
     const [isLoading, setIsLoading] = React.useState(true);
-
-    const userId = 1;
 
     React.useEffect(() => {
         async function fetchData() {
@@ -38,12 +38,14 @@ export default function page() {
                 amount: transaction.amount,
             }));
             setTransactionData(formattedTransactions);
-            const income = await getTotalIndividualIncomes(userId);
-            setTotalIncome(Number(income));
-            const expense = await getTotalIndividualExpenses(userId);
-            setTotalExpense(Number(expense));
-            const transaction = await getTotalIndividualTransactions(userId);
-            setTotalTransaction(Number(transaction));
+            if (user) {
+                const income = await getTotalIndividualIncomes(user?.id);
+                setTotalIncome(Number(income));
+                const expense = await getTotalIndividualExpenses(user?.id);
+                setTotalExpense(Number(expense));
+                const transaction = await getTotalIndividualTransactions(user?.id);
+                setTotalTransaction(Number(transaction));
+            }
 
             setIsLoading(false);
         }

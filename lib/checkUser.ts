@@ -11,16 +11,15 @@ export const checkUser = async () => {
         return null;
     }
 
-    const loggedInUser = await db.select().from(UsersTable).where(eq(UsersTable.clerkId, user.id));
+    const loggedInUser = await db.select().from(UsersTable).where(eq(UsersTable.id, user.id));
 
     if (loggedInUser.length > 0) {
         console.log('user found');
-        console.log(loggedInUser[0]);
         return loggedInUser;
     }
 
     const newUser = await db.insert(UsersTable).values({
-        clerkId: user.id || '',
+        id: user.id || '',
         firstName: user.firstName || '',
         lastName: user.lastName || '',
         username: user.username || '',

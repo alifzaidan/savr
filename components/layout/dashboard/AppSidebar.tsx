@@ -10,18 +10,20 @@ import { NavUser } from './NavUser';
 import { Separator } from '@/components/ui/separator';
 import { getUserData } from '@/db/actions/users';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useUser } from '@clerk/nextjs';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+    const { user } = useUser();
     const [userData, setUserData] = React.useState({ name: '', email: '' });
     const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
-            const users = await getUserData(3);
-            const user = users[0];
-            setUserData({ name: user.firstName + ' ' + user.lastName, email: user.email });
-
+            if (user) {
+                const users = await getUserData(user.id);
+                setUserData({ name: users[0].firstName + ' ' + users[0].lastName, email: users[0].email });
+            }
             setIsLoading(false);
         }
         fetchData();
