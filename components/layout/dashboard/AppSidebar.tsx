@@ -18,7 +18,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     React.useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
-            const users = await getUserData(1);
+            const users = await getUserData(3);
             const user = users[0];
             setUserData({ name: user.firstName + ' ' + user.lastName, email: user.email });
 
