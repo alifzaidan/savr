@@ -21,13 +21,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         async function fetchData() {
             setIsLoading(true);
             if (user) {
-                const users = await getUserData(user.id);
-                setUserData({ name: users[0].firstName + ' ' + users[0].lastName, email: users[0].email });
+                setUserData({ name: user.firstName + ' ' + user.lastName, email: user.emailAddresses[0].emailAddress });
             }
             setIsLoading(false);
         }
         fetchData();
-    }, []);
+    }, [user]);
 
     const data = {
         user: {

@@ -50,7 +50,7 @@ export default function page() {
             setIsLoading(false);
         }
         fetchData();
-    }, []);
+    }, [user]);
 
     if (isLoading) {
         return (

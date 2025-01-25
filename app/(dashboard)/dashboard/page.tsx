@@ -37,8 +37,6 @@ export default function page() {
     React.useEffect(() => {
         async function fetchData() {
             setIsLoading(true);
-            // const users = await getUserData(userId);
-            // const user = users[0];
             if (user) {
                 setUserData({ name: user.firstName || '', email: user.emailAddresses[0].emailAddress || '' });
                 const account = await getIndividualAccount(user?.id);
@@ -69,7 +67,7 @@ export default function page() {
             setIsLoading(false);
         }
         fetchData();
-    }, []);
+    }, [user]);
 
     const ITEMS = [
         {
